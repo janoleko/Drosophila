@@ -21,5 +21,7 @@ In the paper we establish important mathematical properties that allow for compr
 ![Figure 1: Periodically stationary distribution](./figures/p_stationary.png)
 
 <br>
+<br>
+<br>
 
 ![Figure 2: Overall dwell-time distribution](./figures/overall_distr.png)
