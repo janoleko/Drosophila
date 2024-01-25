@@ -22,6 +22,5 @@ In the paper we establish important mathematical properties that allow for compr
 
 <br>
 <br>
-<br>
 
 ![Figure 2: Overall dwell-time distribution](./figures/overall_distr.png)

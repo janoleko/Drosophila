@@ -26,7 +26,7 @@ alt="Figure 1: Periodically stationary distribution" />
 distribution</figcaption>
 </figure>
 
-<br> <br> <br>
+<br> <br>
 
 <figure>
 <img src="./figures/overall_distr.png"
