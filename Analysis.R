@@ -184,6 +184,11 @@ for(k in 1:n){
 }
 
 # calculate confidence intervals via Monte Carlo, based on approximate normal distribution of MLE
+# you can also just load the confidence intervals:
+
+CIs = readRDS("./models/confidence_intervals.rds")
+DeltaCI = CIs$DeltaCI
+RhoCI = CIs$RhoCI
 
 n = 2000 # this takes some time
 timeseq = seq(0,24, length=200)
@@ -208,7 +213,7 @@ for(t in 1:200){
     }
   }
 }
-# CIs = list(DeltaCI, RhoCI)
+# CIs = list(DeltaCI = DeltaCI, RhoCI = RhoCI)
 # saveRDS(CIs, "./models/confidence_intervals.rds")
 
 
@@ -216,9 +221,10 @@ for(t in 1:200){
 
 colrho = "gold2"
 colbox = c("white", "gray45")
+conditions = c("LD", "DD")
+a = 0.3 # alpha value
 
 m = matrix(c(1,1,2,3),nrow = 2, ncol = 2,byrow = TRUE)
-#layout(mat = m, heights = c(0.12, 1, 1))
 layout(mat = m, heights = c(0.13, 1, 1))
 par(mar = c(0,2,1,1))
 plot(1, type = "n", axes=FALSE, xlab="", ylab="")
@@ -235,7 +241,7 @@ cond = 1 # LD condition
 for(cond in 1:2){
   ## rho
   plot(timeseq, Rho_cont[,state,cond], type = "l", lwd = 1, col = colrho, bty = "n", ylim = c(0,1), 
-       ylab = "Pr(high-activity state)", xlab = "time of day", xaxt = "n", main = condition[cond])
+       ylab = "Pr(high-activity state)", xlab = "time of day", xaxt = "n", main = conditions[cond])
   points(0:47/2, Rho[,state,cond], pch = 16, col = colrho)
   polygon(c(timeseq, rev(timeseq)), c(RhoCI[,state,cond,1], rev(RhoCI[,state,cond,2])), col = alpha(colrho, a), border = F)
   
@@ -299,7 +305,7 @@ state = 2 # high-activity state
 cond = 2 # DD condition
 for(t in 1:48){
   plot(1:24, PMF[t,1:24,state,cond], type = "h", lwd = 2, col = color[state], bty = "n", 
-       ylim = c(0,0.8), xlim = c(0,24), xaxt = "n", 
+       ylim = c(0,0.7), xlim = c(0,24), xaxt = "n", 
        ylab = "time-varying distribution", xlab = "dwell time", main = timelab[t])
   axis(1, at = seq(0, 24, by = 2), label = seq(0,12, by = 1)) # dwell time in hours
   Sys.sleep(0.15)
@@ -351,7 +357,6 @@ legend("top", inset=0,
 
 par(mar = c(4.5,4,2.5,1))
 
-conditions = c("LD", "DD")
 for (cond in 1:2){
   plot(1:L, ET[,1,cond], type = "l", bty = "n", xaxt = "n", ylim = c(0,22), lwd = 2, col = color[1],
        ylab = "mean dwell time", xlab = "time of day")
@@ -477,7 +482,6 @@ round(m2,3)
 # pdf("./figures/overall_distr.pdf", width=8.5, height=4)
 
 m = matrix(c(1,1,2,3),nrow = 2, ncol = 2,byrow = TRUE)
-# layout(mat = m, heights = c(0.12, 1, 1))
 layout(mat = m, heights = c(0.15, 1, 1))
 par(mar = c(0,2,1,1))
 plot(1, type = "n", axes=FALSE, xlab="", ylab="")
@@ -490,14 +494,13 @@ legend("top", inset=0,
 par(mar = c(4.5,4,2,1))
 
 cond = 1
-condition = c("LD", "DD")
 lim = 24
 plot(1:lim, PMFO[,state,cond][1:lim], type = "h", lwd = 4, bty = "n", col = color[state], xaxt = "n",
      xlab = "dwell time (in hours)", ylab = "probabilities", ylim = c(0,0.4), xlim = c(0,lim))
 axis(1, at = seq(0, lim, by = 2), label = seq(0, lim/2, by = 1)) # dwell time in hours
 
 # empirical
-states_sub = states[which(data$condition == condition[cond])]
+states_sub = states[which(data$condition == conditions[cond])]
 emp_pmf = prop.table(table(get_dwell_times(states_sub, state)))
 points(as.numeric(names(emp_pmf)), as.numeric(emp_pmf), pch = 19, col = alpha(1, 0.3))
 # problem: Don't know how to even decode the states in RE model
@@ -510,7 +513,7 @@ plot(1:lim, PMFO[,state,cond][1:lim], type = "h", lwd = 4, bty = "n", col = colo
 axis(1, at = seq(0, lim, by = 2), label = seq(0, lim/2, by = 1)) # dwell time in hours
 
 # empirical
-states_sub = states[which(data$condition == condition[cond])]
+states_sub = states[which(data$condition == conditions[cond])]
 emp_pmf = prop.table(table(get_dwell_times(states_sub, state)))
 points(as.numeric(names(emp_pmf)), as.numeric(emp_pmf), pch = 19, col = alpha(1, 0.3))
 # problem: Don't know how to even decode the states in RE model
@@ -537,14 +540,13 @@ legend("top", inset=0,
 par(mar = c(4.5,4,2,1))
 
 cond = 1
-condition = c("LD", "DD")
 lim = 24
 plot(1:lim, dgeom((1:lim)-1, prob = 1-diag(Gamma_hom[,,cond])[state]), type = "h", lwd = 4, bty = "n", col = color[state], xaxt = "n",
      xlab = "dwell time (in hours)", ylab = "probabilities", ylim = c(0,0.4), xlim = c(0,lim))
 axis(1, at = seq(0, lim, by = 2), label = seq(0, lim/2, by = 1)) # dwell time in hours
 
 # empirical
-states_sub_hom = states_hom[which(data$condition == condition[cond])]
+states_sub_hom = states_hom[which(data$condition == conditions[cond])]
 emp_pmf_hom = prop.table(table(get_dwell_times(states_sub_hom, state)))
 points(as.numeric(names(emp_pmf_hom)), as.numeric(emp_pmf_hom), pch = 19, col = alpha(1, 0.3))
 # problem: Don't know how to even decode the states in RE model
@@ -557,7 +559,7 @@ plot(1:lim, dgeom((1:lim)-1, prob = 1-diag(Gamma_hom[,,cond])[state]), type = "h
 axis(1, at = seq(0, lim, by = 2), label = seq(0, lim/2, by = 1)) # dwell time in hours
 
 # empirical
-states_sub_hom = states_hom[which(data$condition == condition[cond])]
+states_sub_hom = states_hom[which(data$condition == conditions[cond])]
 emp_pmf_hom = prop.table(table(get_dwell_times(states_sub_hom, state)))
 points(as.numeric(names(emp_pmf_hom)), as.numeric(emp_pmf_hom), pch = 19, col = alpha(1, 0.3))
 # problem: Don't know how to even decode the states in RE model
