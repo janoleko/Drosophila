@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Drosophila
+# Analyzing the diel activity pattern of Drosophila melanogaster
 
 This repository contains **R** code for conducting the analysis in the paper ["Inference on the state process of periodically inhomogeneous hidden Markov models for animal behavior"](https://arxiv.org/abs/2312.14583), which can be replicated by executing `Analysis.R`.
 

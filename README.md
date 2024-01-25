@@ -1,5 +1,5 @@
 
-# Drosophila
+# Analyzing the diel activity pattern of Drosophila melanogaster
 
 This repository contains **R** code for conducting the analysis in the
 paper [“Inference on the state process of periodically inhomogeneous
