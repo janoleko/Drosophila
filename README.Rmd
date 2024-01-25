@@ -1,0 +1,17 @@
+---
+output: github_document
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "./figures/README-",
+  out.width = "75%",
+  fig.align = "center"
+)
+```
+
+# Drosophila
+
+This repository contains code for conducting the analysis in the paper "Inference on the state process of periodically inhomogeneous hidden Markov models for animal behavior".
