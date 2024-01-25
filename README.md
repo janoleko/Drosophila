@@ -10,22 +10,24 @@ executing `Analysis.R`.
 In the paper we establish important mathematical properties that allow
 for comprehensive statistical inference related to periodically
 inhomogeneous hidden Markov models thereby providing guidance for model
-building and model checking. Specifically, we derive the periodically
-varying unconditional state distribution as well as the time-varying and
-overall state dwell-time distributions – all of which are of key
-interest when the inferential focus lies on the dynamics of the state
-process.
+building and model checking. Specifically, we derive the **periodically
+varying unconditional state distribution** (cf. Figure 1) as well as the
+**time-varying** and **overall state dwell-time distributions**
+(cf. Figure 2) – all of which are of key interest when the inferential
+focus lies on the dynamics of the state process.
 
 <figure>
 <img src="./figures/p_stationary.png"
-alt="Periodically stationary distribution" />
-<figcaption aria-hidden="true">Periodically stationary
+alt="Figure 1: Periodically stationary distribution" />
+<figcaption aria-hidden="true">Figure 1: Periodically stationary
 distribution</figcaption>
 </figure>
 
+<br> <br>
+
 <figure>
 <img src="./figures/overall_distr.png"
-alt="Overall dwell-time distribution" />
-<figcaption aria-hidden="true">Overall dwell-time
+alt="Figure 2: Overall dwell-time distribution" />
+<figcaption aria-hidden="true">Figure 2: Overall dwell-time
 distribution</figcaption>
 </figure>
