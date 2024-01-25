@@ -575,7 +575,7 @@ legend("top", legend = c("DD"), bty = "n")
 # pdf("./figures/state_dependent.pdf", width=8, height=4)
 
 delta_overall = apply(Delta, 2, mean)
-nSample = 100 # this can be increased
+nSample = 200 # this can be increased
 eta = matrix(NA, nrow = nSample, ncol = 2)
 eta[,1] = rgamma(nSample, shape=mu_hat[1]^2/sigma_hat[1]^2,scale=sigma_hat[1]^2/mu_hat[1])
 eta[,2] = rgamma(nSample, shape=mu_hat[2]^2/sigma_hat[2]^2,scale=sigma_hat[2]^2/mu_hat[2])
