@@ -17,7 +17,7 @@ varying unconditional state distribution** (cf. Figure 1) as well as the
 focus lies on the dynamics of the state process. We use the associated
 novel inference and model-checking tools to investigate changes in the
 diel activity patterns of fruit flies in response to changing light
-conditions.
+conditions. The data were kindly provided by Angelica Coculla and Ralf Stanewsky.
 
 <figure>
 <img src="./figures/p_stationary.png"
